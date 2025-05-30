@@ -30,4 +30,4 @@ jobs:
       - name: Push image to ECR
         run: |
           IMAGE_NAME=vit-classifier-lambda1
-          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/$IMAGE_NAME:latest
+          docker push 183295451913.dkr.ecr.us-east-1.amazonaws.com/$IMAGE_NAME:latest
