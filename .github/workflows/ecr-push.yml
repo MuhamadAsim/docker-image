@@ -11,6 +11,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: AKIASVLKCUMEX7BVC2DN
+          aws-secret-access-key: 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
+          aws-region: us-east-1
+
       - name: Log in to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v2
 
@@ -25,7 +32,6 @@ jobs:
       - name: Create ECR repo if not exists
         run: |
           aws ecr create-repository --repository-name vit-classifier-lambda1 --region us-east-1 || true
-          
 
       - name: Push image to ECR
         run: |
