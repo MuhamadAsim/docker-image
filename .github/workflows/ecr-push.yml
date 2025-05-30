@@ -24,7 +24,8 @@ jobs:
 
       - name: Create ECR repo if not exists
         run: |
-          aws ecr create-repository --repository-name vit-classifier-lambda1 --region ${{ secrets.AWS_REGION }} || true
+          aws ecr create-repository --repository-name vit-classifier-lambda1 --region us-east-1 || true
+          
 
       - name: Push image to ECR
         run: |
