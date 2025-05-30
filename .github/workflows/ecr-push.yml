@@ -1,0 +1,32 @@
+name: Push Public Image to Amazon ECR
+
+on:
+  workflow_dispatch:
+
+jobs:
+  push-image:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Log in to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Pull public Docker image
+        run: docker pull mrhammad/vit-classifier-lambda1
+
+      - name: Tag image for ECR
+        run: |
+          IMAGE_NAME=vit-classifier-lambda1
+          docker tag mrhammad/vit-classifier-lambda1 ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/$IMAGE_NAME:latest
+
+      - name: Create ECR repo if not exists
+        run: |
+          aws ecr create-repository --repository-name vit-classifier-lambda1 --region ${{ secrets.AWS_REGION }} || true
+
+      - name: Push image to ECR
+        run: |
+          IMAGE_NAME=vit-classifier-lambda1
+          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/$IMAGE_NAME:latest
