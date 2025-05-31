@@ -27,7 +27,7 @@ jobs:
       - name: Tag image for ECR
         run: |
           IMAGE_NAME=vit-classifier-lambda
-          docker tag mrhammad/vit-classifier-lambda YOUR_AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/$IMAGE_NAME:latest
+          docker tag mrhammad/vit-classifier-lambda 183295451913.dkr.ecr.us-east-1.amazonaws.com/$IMAGE_NAME:latest
 
       - name: Create ECR repo if not exists
         run: |
@@ -36,4 +36,4 @@ jobs:
       - name: Push image to ECR
         run: |
           IMAGE_NAME=vit-classifier-lambda
-          docker push YOUR_AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/$IMAGE_NAME:latest
+          docker push 183295451913.dkr.ecr.us-east-1.amazonaws.com/$IMAGE_NAME:latest
