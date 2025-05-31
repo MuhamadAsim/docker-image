@@ -14,25 +14,26 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
       - name: Log in to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: Pull public Docker image
-        run: docker pull mrhammad/vit-classifier-lambda1
+        run: docker pull mrhammad/vit-classifier-lambda
 
       - name: Tag image for ECR
         run: |
-          IMAGE_NAME=vit-classifier-lambda1
-          docker tag mrhammad/vit-classifier-lambda1 183295451913.dkr.ecr.us-east-1.amazonaws.com/$IMAGE_NAME:latest
+          IMAGE_NAME=vit-classifier-lambda
+          docker tag mrhammad/vit-classifier-lambda YOUR_AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/$IMAGE_NAME:latest
 
       - name: Create ECR repo if not exists
         run: |
-          aws ecr create-repository --repository-name vit-classifier-lambda1 --region us-east-1 || true
+          aws ecr create-repository --repository-name vit-classifier-lambda --region us-east-1 || true
 
       - name: Push image to ECR
         run: |
-          IMAGE_NAME=vit-classifier-lambda1
-          docker push 183295451913.dkr.ecr.us-east-1.amazonaws.com/$IMAGE_NAME:latest
+          IMAGE_NAME=vit-classifier-lambda
+          docker push YOUR_AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/$IMAGE_NAME:latest
