@@ -22,18 +22,18 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: Pull public Docker image
-        run: docker pull unknown102/my-classifier-image
+        run: docker pull unknown102/my-classifier-image1
 
       - name: Tag image for ECR
         run: |
-          IMAGE_NAME=my-classifier-image
-          docker tag unknown102/my-classifier-image 183295451913.dkr.ecr.us-east-1.amazonaws.com/$IMAGE_NAME:latest
+          IMAGE_NAME=my-classifier-image1
+          docker tag unknown102/my-classifier-image1 183295451913.dkr.ecr.us-east-1.amazonaws.com/$IMAGE_NAME:latest
 
       - name: Create ECR repo if not exists
         run: |
-          aws ecr create-repository --repository-name my-classifier-image --region us-east-1 || true
+          aws ecr create-repository --repository-name my-classifier-image1 --region us-east-1 || true
 
       - name: Push image to ECR
         run: |
-          IMAGE_NAME=my-classifier-image
+          IMAGE_NAME=my-classifier-image1
           docker push 183295451913.dkr.ecr.us-east-1.amazonaws.com/$IMAGE_NAME:latest
