@@ -22,18 +22,18 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: Pull public Docker image
-        run: docker pull unknown102/vit-model-image-version-2
+        run: docker pull unknown102/vit-model-image-version-3
 
       - name: Tag image for ECR
         run: |
-          IMAGE_NAME=vit-model-image-version-2
-          docker tag unknown102/vit-model-image-version-2 183295451913.dkr.ecr.us-east-1.amazonaws.com/$IMAGE_NAME:latest
+          IMAGE_NAME=vit-model-image-version-3
+          docker tag unknown102/vit-model-image-version-3 183295451913.dkr.ecr.us-east-1.amazonaws.com/$IMAGE_NAME:latest
 
       - name: Create ECR repo if not exists
         run: |
-          aws ecr create-repository --repository-name vit-model-image-version-2 --region us-east-1 || true
+          aws ecr create-repository --repository-name vit-model-image-version-3 --region us-east-1 || true
 
       - name: Push image to ECR
         run: |
-          IMAGE_NAME=vit-model-image-version-2
+          IMAGE_NAME=vit-model-image-version-3
           docker push 183295451913.dkr.ecr.us-east-1.amazonaws.com/$IMAGE_NAME:latest
