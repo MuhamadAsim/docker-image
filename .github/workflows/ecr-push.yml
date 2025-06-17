@@ -19,7 +19,7 @@ jobs:
           aws-region: ap-south-1
 
       - name: Log in to Amazon ECR  # <-- FIXED to use @v1
-        uses: aws-actions/amazon-ecr-login@v1
+        uses: aws-actions/amazon-ecr-login@v2
 
       - name: Pull public Docker image
         run: docker pull asimayub747/frontend-image-test1
@@ -27,7 +27,7 @@ jobs:
       - name: Tag image for ECR
         run: |
           IMAGE_NAME=frontend-image-test1
-          docker tag asimayub747/frontend-image-test1 183295451913.dkr.ecr.ap-south-1.amazonaws.com/$IMAGE_NAME:latest
+          docker tag asimayub747/frontend-image-test1 977099002600.dkr.ecr.ap-south-1.amazonaws.com/$IMAGE_NAME:latest
 
       - name: Create ECR repo if not exists
         run: |
@@ -36,4 +36,4 @@ jobs:
       - name: Push image to ECR
         run: |
           IMAGE_NAME=frontend-image-test1
-          docker push 183295451913.dkr.ecr.ap-south-1.amazonaws.com/$IMAGE_NAME:latest
+          docker push 977099002600.dkr.ecr.ap-south-1.amazonaws.com/$IMAGE_NAME:latest
