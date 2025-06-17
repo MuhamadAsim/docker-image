@@ -16,24 +16,24 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+          aws-region: ap-south-1
 
       - name: Log in to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: Pull public Docker image
-        run: docker pull unknown102/vit-model-image-version-4
+        run: docker pull asimayub747/frontend-image-test1
 
       - name: Tag image for ECR
         run: |
-          IMAGE_NAME=vit-model-image-version-4
-          docker tag unknown102/vit-model-image-version-4 183295451913.dkr.ecr.us-east-1.amazonaws.com/$IMAGE_NAME:latest
+          IMAGE_NAME=frontend-image-test1
+          docker tag asimayub747/frontend-image-test1 183295451913.dkr.ecr.ap-south-1.amazonaws.com/$IMAGE_NAME:latest
 
       - name: Create ECR repo if not exists
         run: |
-          aws ecr create-repository --repository-name vit-model-image-version-4 --region us-east-1 || true
+          aws ecr create-repository --repository-name frontend-image-testing --region ap-south-1 || true
 
       - name: Push image to ECR
         run: |
-          IMAGE_NAME=vit-model-image-version-4
-          docker push 183295451913.dkr.ecr.us-east-1.amazonaws.com/$IMAGE_NAME:latest
+          IMAGE_NAME=frontend-image-test1
+          docker push 183295451913.dkr.ecr.ap-south-1.amazonaws.com/$IMAGE_NAME:latest
