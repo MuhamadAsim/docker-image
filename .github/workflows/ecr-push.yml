@@ -24,15 +24,14 @@ jobs:
       - name: Pull public Docker image
         run: docker pull asimayub747/frontend-image-test1
 
-      - name: Create ECR repository if it doesn't exist
-        run: |
-          aws ecr describe-repositories --repository-names frontend-image-test1 --region ap-south-1 || \
-          aws ecr create-repository --repository-name frontend-image-test1 --region ap-south-1
-
       - name: Tag image for ECR
         run: |
           IMAGE_NAME=frontend-image-test1
           docker tag asimayub747/frontend-image-test1 183295451913.dkr.ecr.ap-south-1.amazonaws.com/$IMAGE_NAME:latest
+
+      - name: Create ECR repo if not exists
+        run: |
+          aws ecr create-repository --repository-name frontend-image-test1 --region ap-south-1 || true
 
       - name: Push image to ECR
         run: |
