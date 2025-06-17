@@ -19,7 +19,7 @@ jobs:
           aws-region: ap-south-1
 
       - name: Log in to Amazon ECR
-        uses: aws-actions/amazon-ecr-login@v2
+        uses: aws-actions/amazon-ecr-login@v1
 
       - name: Pull public Docker image
         run: docker pull asimayub747/frontend-image-test1
